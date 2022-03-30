@@ -1,6 +1,7 @@
 package ladder.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 public class UserInterface {
 
     private static final String SEPARATOR = ",";
-    private Scanner sc;
+    private final Scanner sc;
 
     public UserInterface() {
         sc = new Scanner(System.in);
@@ -40,11 +41,13 @@ public class UserInterface {
 
     public int inputLadderHeight() {
         GameDisplay.guideLadderHeightInput();
+
         return Integer.parseInt(sc.nextLine());
     }
 
     public String inputPlayerNameForResult() {
         GameDisplay.guideResultOfPlayer();
+
         return sc.nextLine();
     }
 
@@ -54,15 +57,14 @@ public class UserInterface {
             GameDisplay.showError();
             return true;
         }
+
         return false;
     }
 
     private List<String> getElementList(String input) {
         List<String> arrayList = new ArrayList<>();
         String[] players = input.split(SEPARATOR);
-        for (int i = 0; i < players.length; i++) {
-            arrayList.add(players[i]);
-        }
+        Collections.addAll(arrayList, players);
 
         return arrayList;
     }

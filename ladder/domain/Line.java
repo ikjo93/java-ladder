@@ -6,9 +6,13 @@ import java.util.Random;
 
 public class Line {
 
+    private static final String LADDER_LINE = "-----";
+    private static final String LADDER_EMPTY_LINE = "     ";
+    private static final String LADDER_POLE = "|";
+
     private boolean flag; // 사다리 Line 겹치지 않도록 flag 설정
-    private Random rd;
-    private List<Boolean> points;
+    private final Random rd;
+    private final List<Boolean> points;
 
     public Line(int playerCount) {
         rd = new Random();
@@ -22,7 +26,7 @@ public class Line {
 
     // 라인의 이전 좌표 값에 선이 있는지 유무를 판단하여 선 추가 유무 결정
     private boolean getLadderLine() {
-        if (flag == true) {
+        if (flag) {
             flag = false;
             return false;
         }
@@ -31,10 +35,21 @@ public class Line {
             flag = true;
         }
 
-        return randomValue == 1 ? true : false;
+        return randomValue == 1;
     }
 
-    public List<Boolean> getPoints() {
-        return points;
+    public String getLineString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LADDER_POLE);
+        points.forEach(e -> sb.append(e ? LADDER_LINE + LADDER_POLE : LADDER_EMPTY_LINE + LADDER_POLE));
+        return sb.toString();
+    }
+
+    public int getLengthX() {
+        return points.size();
+    }
+
+    public boolean elementIsTrue(int posX) {
+        return points.get(posX);
     }
 }

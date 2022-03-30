@@ -8,9 +8,6 @@ import java.util.Map;
 public class GameDisplay {
 
     private static final int PADDING_VALUE = 5;
-    private static final String LADDER_LINE = "-----";
-    private static final String LADDER_EMPTY_LINE = "     ";
-    private static final String LADDER_POLE = "|";
 
     public static void guidePlayerNameInput() {
         System.out.println("참여할 사람의 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요.)");
@@ -29,7 +26,8 @@ public class GameDisplay {
     }
 
     public static void guideResultOfPlayer() {
-        System.out.printf("%n결과를 보고 싶은 사람은?%n");
+        System.out.println();
+        System.out.printf("결과를 보고 싶은 사람은?%n");
     }
 
     public static void showGameExit() {
@@ -45,7 +43,7 @@ public class GameDisplay {
     private static void showSubInfo(List<String> items) {
         System.out.print("  ");
         for (String item : items) {
-            System.out.printf(getPaddingString(item) + " ");
+            System.out.printf("%s ", getPaddingString(item));
         }
         System.out.println();
     }
@@ -59,21 +57,19 @@ public class GameDisplay {
     }
 
     private static void showLadderRow(Line line) {
-        System.out.print(LADDER_POLE);
-        line.getPoints().forEach(e -> System.out.print(e == true ? LADDER_LINE + LADDER_POLE : LADDER_EMPTY_LINE + LADDER_POLE));
+        System.out.print(line.getLineString());
     }
 
     // Middle Padding
     private static String getPaddingString(String data) {
         if (PADDING_VALUE <= data.length()) return data;
         StringBuilder sb = new StringBuilder(PADDING_VALUE);
-        for (int i = 0; i < (PADDING_VALUE - data.length()) / 2; i++) {
-            sb.append(" ");
-        }
+        sb.append(" ".repeat((PADDING_VALUE - data.length()) / 2));
         sb.append(data);
         while (sb.length() < PADDING_VALUE) {
             sb.append(" ");
         }
+
         return sb.toString();
     }
 

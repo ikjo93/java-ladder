@@ -17,7 +17,7 @@ class LadderLineTest {
         Line line = new Line(testPlayerCount);
 
         // then
-        boolean result = line.getPoints().stream().anyMatch(v -> v == true);
+        boolean result = line.getLineString().contains("-----");
         assertThat(result).isTrue();
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 public class GameApp {
 
     private static final String EXIT_WORD = "춘식이";
-    private UserInterface userInterface;
-    private LadderProcessor ladderProcessor;
+    private final UserInterface userInterface;
+    private final LadderProcessor ladderProcessor;
     private GameResult gameResult;
 
     public GameApp() {
@@ -29,7 +29,9 @@ public class GameApp {
 
         // 플레이어별 결과 가져오기 및 게임 결과 화면 출력
         gameResult = new GameResult(players, ladderInfo, results);
-        while (true) informResult();
+        while (true) {
+            informResult();
+        }
     }
 
     private void informResult() {
